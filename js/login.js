@@ -31,7 +31,7 @@ function checkLogin() {
     let pass = document.getElementById('pwd').value;
 
     if (user != "" && pass != "") {
-        location.href = "../index.html"
+        location.href = "./repo_eMercado/index.html"
     } else {
         alert("Comprube sus datos")
     }
