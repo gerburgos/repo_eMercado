@@ -31,9 +31,9 @@ function checkLogin() {
     let pass = document.getElementById('pwd').value;
 
     if (user != "" && pass != "") {
-        location.href = "https://gerburgos.github.io/repo_eMercado/index.html"
+        location.href = "../index.html";
     } else {
-        alert("Comprube sus datos")
+        alert("Comprube sus datos");
     }
 
 }
