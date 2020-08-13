@@ -22,7 +22,7 @@ function onSignIn(googleUser) {
 
     console.log("ID Token: " + id_token);
 
-    location.href = "https://gerburgos.github.io/repo_eMercado/index.html"
+     location.href = "https://gerburgos.github.io/repo_eMercado/index.html"
 
 }
 
