@@ -34,7 +34,7 @@ function checkLogin() {
     if (user.trim() === "" || pass.trim() === "") {
         alert("Comprube sus datos");
     } else {
-        location.href = "../index.html";
+        location.href = "./repo_eMercado/index.html";
     }
 
 }
