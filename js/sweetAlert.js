@@ -36,7 +36,7 @@ function designSign() {
                 showConfirmButton: false
             })
 
-            location.href = "../login.html";
+            location.href = "./login.html";
 
         } else if (
             result.dismiss === Swal.DismissReason.cancel
