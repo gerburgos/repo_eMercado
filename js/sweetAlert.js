@@ -37,7 +37,7 @@ function designSign() {
                 showConfirmButton: false
             })
 
-            location.href = "../index.html";
+            location.href = "https://gerburgos.github.io/repo_eMercado/index.html";
 
         } else if (
             result.dismiss === Swal.DismissReason.cancel
