@@ -22,7 +22,7 @@ function onSignIn(googleUser) {
 
     console.log("ID Token: " + id_token);
 
-    location.href = "../cover.html"
+    location.href = "https://gerburgos.github.io/repo_eMercado/cover.html"
 
 
 }
@@ -34,7 +34,7 @@ function checkLogin() {
     if (user.trim() === "" || pass.trim() === "") {
         alert("Comprube sus datos");
     } else {
-        location.href = "../cover.html";
+        location.href = "https://gerburgos.github.io/repo_eMercado/cover.html";
     }
 
 }
