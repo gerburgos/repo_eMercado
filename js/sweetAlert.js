@@ -6,7 +6,8 @@ Swal.fire({
     timer: 5000,
     timerProgressBar: true,
     showConfirmButton: false,
-    closeOnClickOutside: false
+    closeOnClickOutside: false,
+    allowOutsideClick: false
 
 });
 
