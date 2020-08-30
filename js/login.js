@@ -38,7 +38,7 @@ function checkLogin() {
     } else {
         localStorage.setItem("img", img);
         localStorage.setItem("user", user);
-        location.href = "https://gerburgos.github.io/repo_eMercado/cover.html";
+        location.href ="https://gerburgos.github.io/repo_eMercado/cover.html";
     }
 
 }
