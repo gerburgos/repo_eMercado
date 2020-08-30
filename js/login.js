@@ -32,7 +32,7 @@ function onSignIn(googleUser) {
 function checkLogin() {
     let user = document.getElementById('usr').value;
     let pass = document.getElementById('pwd').value;
-    let img = "../img/unknown.png"
+    let img = "https://i.imgur.com/mhI5gpf.png"
     if (user.trim() === "" || pass.trim() === "") {
         alert("Comprube sus datos");
     } else {
