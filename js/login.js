@@ -4,7 +4,7 @@
 document.addEventListener("DOMContentLoaded", function(e) {
 
 });
-
+// Funcionando
 function onSignIn(googleUser) {
     // Useful data for your client-side scripts:
     var profile = googleUser.getBasicProfile();
