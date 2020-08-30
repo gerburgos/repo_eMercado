@@ -13,7 +13,7 @@ function onLoad() {
 }
 
 function deleteUser() {
-    locale.href= "https://gerburgos.github.io/repo_eMercado/index.html"
+    location.href = "https://gerburgos.github.io/repo_eMercado/index.htmnl"
     localStorage.removeItem('user');
     localStorage.removeItem('img');
 }
