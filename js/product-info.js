@@ -249,6 +249,12 @@ document.getElementById('5star').addEventListener('click', () => {
     numberOfStars = 5;
 });
 
+function addZero(i) {
+    if (i < 10) {
+        i = '0' + i;
+    }
+    return i;
+}
 
 
 function nowDate() {
