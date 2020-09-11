@@ -139,7 +139,7 @@ function showProductSelected(array, arrayComments) {
     document.getElementById('contents').innerHTML = result;
 
     for (let i = 0; i < productInfoArray.images.length; i++) {
-        imgs += '<img class="img-gallery" src="../' + productInfoArray.images[i] + '" width="200px" height="200px" style="padding:10px; border-radius: 50%;">'
+        imgs += '<img class="img-gallery" src="' + productInfoArray.images[i] + '" width="200px" height="200px" style="padding:10px; border-radius: 50%;">'
         document.getElementById("imagenesinfo").innerHTML = imgs;
     };
 
@@ -249,12 +249,7 @@ document.getElementById('5star').addEventListener('click', () => {
     numberOfStars = 5;
 });
 
-function addZero(i) {
-    if (i < 10) {
-        i = '0' + i;
-    }
-    return i;
-}
+
 
 function nowDate() {
     var hoy = new Date();
