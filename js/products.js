@@ -180,7 +180,7 @@ const filter = () => {
              <div class="card-body">
                   <h5 class="">` + product.name + ` </h5>
                     <p class="card-text" style="height: 96px">` + product.description + ` <br> <b>` + product.cost + " " + product.currency + `</b></p>   
-                   <a href="#" class="btn btn-primary">Ver más</a>
+                   <a href="product-info.html" class="btn btn-primary">Ver más</a>
                    <p class="text-muted" style="float:right; text-align: center;">` + product.soldCount + ` sold</p>
              </div>
               </div>
