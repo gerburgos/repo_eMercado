@@ -38,7 +38,7 @@ function designSign() {
                 showConfirmButton: false
             })
 
-            location.href = "../index.html";
+            location.href = "index.html";
 
         } else if (
             result.dismiss === Swal.DismissReason.cancel
@@ -71,6 +71,6 @@ function errUser() {
         showConfirmButton: true,
         closeOnClickOutside: false,
         allowOutsideClick: false,
-        confirmButtonText: '<a style="color: white;" href="../index.html">OK</a>',
+        confirmButtonText: '<a style="color: white;" href="index.html">OK</a>',
     })
 }
