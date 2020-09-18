@@ -37,8 +37,8 @@ function designSign() {
                 icon: 'success',
                 showConfirmButton: false
             })
-            deleteUser();
             location.href = "index.html";
+            deleteUser();
 
         } else if (
             result.dismiss === Swal.DismissReason.cancel
