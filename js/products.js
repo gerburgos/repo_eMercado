@@ -61,7 +61,7 @@ function showCategoriesList(array) {
                                    `
             if (category.name === "Chevrolet Onix Joy") {
                 htmlContentToAppend += `
-                <a href="../product-info.html" class="btn btn-primary">Ver más</a>
+                <a href="product-info.html" class="btn btn-primary">Ver más</a>
                 <p class="text-muted" style="float:right; text-align: center;">` + category.soldCount + ` sold</p>
                 </div>
                 </div>
