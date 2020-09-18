@@ -37,7 +37,7 @@ function designSign() {
                 icon: 'success',
                 showConfirmButton: false
             })
-
+            deleteUser();
             location.href = "index.html";
 
         } else if (
