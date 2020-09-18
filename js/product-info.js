@@ -224,7 +224,7 @@ function showProductSelected(array, arrayComments, arrayRel) {
                 productsRel +=
                     `
                     <div style="display:inline-block;">   
-                    <div class="card list-group-item-action text-justify m-3" style="width: 18rem;" onclick="cancelFunction();">
+                    <div class="card list-group-item-action text-justify m-3" style="width: 18rem; cursor: pointer;" onclick="cancelFunction();">
                     <img class="card-img-top" src="${arrayRel[relProd].imgSrc}" alt="Card image cap" style="border: 1px solid lightgrey;">
                     <div class="card-body">
                     <h5 class="card-title">${arrayRel[relProd].name}</h5>
