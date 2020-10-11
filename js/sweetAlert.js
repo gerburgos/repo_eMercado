@@ -36,7 +36,7 @@ function designSign() {
                 text: 'Google Sign Out',
                 icon: 'success',
                 showConfirmButton: false
-            })
+            })        
             location.href = "index.html";
             deleteUser();
 
