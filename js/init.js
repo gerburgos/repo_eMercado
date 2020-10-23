@@ -175,8 +175,7 @@ function validationMasterCard() {
         alertErrorPayment.innerHTML = msgError;
         $("#modal-payment").css("height", "470px");
         $("#ErrorPayment").removeClass("d-none");
-    }
-      else if(cvv.trim() === "") {
+    } else if(cvv.trim() === "") {
         msgError = `<strong>Warning!</strong>&nbsp;You must enter a CVV/CVC2`
         alertErrorPayment.innerHTML = msgError;
         $("#modal-payment").css("height", "470px");
