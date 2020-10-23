@@ -158,6 +158,7 @@ function validationMasterCard() {
     let card = document.getElementById("card-number").value;
     let expDateM = document.getElementById("experiationMonth").value;
     let expDateY = document.getElementById("experiationYear").value;
+    let cvv = document.getElementById("CVV").value
     let anio = (new Date).getFullYear();
     if (card.length < 16) {
         msgError = `<strong>Warning!</strong>&nbsp;You must enter a valid card`
@@ -174,12 +175,17 @@ function validationMasterCard() {
         alertErrorPayment.innerHTML = msgError;
         $("#modal-payment").css("height", "470px");
         $("#ErrorPayment").removeClass("d-none");
-    } else {
-        document.getElementById("SuccessPayment").innerHTML = msgSuccess;
+    } else if(cvv.trim() === "") {
+        msgError = `<strong>Warning!</strong>&nbsp;You must enter a CVV/CVC2`
+        alertErrorPayment.innerHTML = msgError;
         $("#modal-payment").css("height", "470px");
-        $("#SuccessPayment").removeClass("d-none");
+        $("#ErrorPayment").removeClass("d-none");
+    }else {
+        document.getElementById("SuccessPayment").innerHTML = msgSuccess;     
+        $("#modal-payment").css("height", "470px");
+        $("#SuccessPayment").removeClass("d-none");    
     }
-    setTimeout(function () { $("#ErrorPayment").addClass("d-none"); $("#modal-payment").css("height", "400px"); $("#SuccessPayment").addClass("d-none");}, 3000);
+    setTimeout(function () { $("#ErrorPayment").addClass("d-none"); $("#modal-payment").css("height", "400px");$("#SuccessPayment").addClass("d-none"); }, 3000);
 }
 function validationInputPay() {
 
@@ -202,7 +208,7 @@ function validationInputPay() {
                     setTimeout(function () { $("#ErrorPayment").addClass("d-none"); $("#modal-payment").css("height", "400px"); }, 3000);
                 }
                 validationMasterCard();
-
+                  
             } else if (pay == 1) {
                 let email = document.getElementById("email_PayPal").value;
                 if (email.trim() === "") {
