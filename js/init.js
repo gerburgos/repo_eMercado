@@ -181,11 +181,11 @@ function validationMasterCard() {
         $("#modal-payment").css("height", "470px");
         $("#ErrorPayment").removeClass("d-none");
     }else {
-        document.getElementById("SuccessPayment").innerHTML = msgSuccess;
+        document.getElementById("SuccessPayment").innerHTML = msgSuccess;     
         $("#modal-payment").css("height", "470px");
         $("#SuccessPayment").removeClass("d-none");
     }
-    setTimeout(function () { $("#SuccessPayment").addClass("d-none"); $("#modal-payment").css("height", "400px"); }, 3000);
+    setTimeout(function () { $("#ErrorPayment").addClass("d-none"); $("#modal-payment").css("height", "400px");$("#SuccessPayment").addClass("d-none"); }, 3000);
 }
 function validationInputPay() {
 
