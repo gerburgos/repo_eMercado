@@ -71,6 +71,6 @@ function errUser() {
         showConfirmButton: true,
         closeOnClickOutside: false,
         allowOutsideClick: false,
-        confirmButtonText: '<a style="color: white;" href="index.html">OK</a>',
+        confirmButtonText: '<a style="color: white;" href="../index.html">OK</a>',
     })
 }

@@ -60,23 +60,24 @@ function showCart(array) {
             
             <div class="row">
             
-            <div class="shoping__checkout" style="width: 45%; height: 300px ; display: inline-block;">
-            <h5>Envío</h5>
+            <div class="shoping__checkout" style="width: 45%; height: 340px ; display: inline-block;">
+            <h5>Delivery</h5>
             <ul>
-                <li><input name="envio" type="radio" value="0" checked="" required="" onclick="calcEnvio();"> Retira en el local</li>
-                <li><input name="envio" type="radio" value="5" required="" onclick="calcEnvio();" > Montevideo Urbano: US$ 5.00</li>
-                <li><input name="envio" type="radio" value="12" required="" onclick="calcEnvio();"> Envío al Interior para despacho: US$ 12.00</li>
+                <li><input name="envio" type="radio" value="15" required="" onclick="calcEnvio();"> Premium (2-5 días) - Costo del 15% sobre el subtotal.</li>
+                <li><input name="envio" type="radio" value="7" required="" onclick="calcEnvio();" > Express (5-8 días) - Costo del 7% sobre el subtotal.</li>
+                <li><input name="envio" type="radio" value="5" checked="" required="" onclick="calcEnvio();"> Standard (12 a 15 días) - Costo del 5% sobre el subtotal.</li>
                 <p>Las opciones de envío se actualizarán durante el pago.</p>
             </ul>
         </div>
                 <div class="col-lg-6 ml-auto">
              
-                    <div class="shoping__checkout" style="height: 300px">
+                    <div class="shoping__checkout" style="height: 340px">
                         <h5>Cart Total</h5>
                         <ul>
-                            <li>Subtotal <span id="subT">${"$" + calcSubTotal()}</span></li>
-                            <li>Total <span id="Total">${"$" + calcSubTotal()}</span></li>
-                            <a href="" class="primary-btn" style="margin-top: 20px" data-toggle="modal" data-target="#form">Proceed to checkout</a>
+                            <li>Subtotal <span id="subT">${calcSubTotal() + " USD"}</span></li>
+                            <li>Delivery Cost <span id="envioP">625 USD</span></li>
+                            <li>Total <span id="Total">${calcSubTotal() + " USD"}</span></li>
+                            <a href="" class="primary-btn" style="margin-top: 25px" data-toggle="modal" data-target="#form">Proceed to checkout</a>
                         </ul>
                     </div>
                 </div>
@@ -127,7 +128,7 @@ function showSubT(id){
    }
 
         document.getElementById("showTotal_"+id).innerHTML = x + " USD"; 
-    document.getElementById("subT").innerHTML = "$" + calcSubTotal();
+    document.getElementById("subT").innerHTML = calcSubTotal() + " USD";
 
     calcEnvio();
 }
@@ -150,19 +151,22 @@ function calcEnvio(){
     let envio = document.getElementsByName("envio");
     for (var i = 0; i < envio.length;i++){
       if(envio[i].checked){
-          var pepe = parseInt(envio[i].value);
+          var env = parseInt(envio[i].value);         
           break;
       }
     }  
-    calcTotal(pepe);
+    calcTotal(env);
 }
 
 function calcTotal(x){
-   document.getElementById('Total').innerHTML = "$" + (x + calcSubTotal());
+    let totalconEnvio = (x * calcSubTotal()) / 100;
+    document.getElementById('envioP').innerHTML = Math.round(totalconEnvio) + " USD";
+   document.getElementById('Total').innerHTML = Math.round((totalconEnvio + calcSubTotal())) + " USD";
 }
 
 function removeItem(id){
     $('#'+id).css('display', 'none');
+    
 }
 
 function convertToUSD (currency, unitCost, id){
@@ -172,6 +176,74 @@ function convertToUSD (currency, unitCost, id){
         return unitCost;
      }
 }
+
+$('#form').modal('hide',{ 
+    backdrop: 'static', 
+    keyboard: false 
+}); 
+$('#formPayment').modal('hide',{ 
+    backdrop: 'static', 
+    keyboard: false 
+}); 
+
+function methodPayment(){
+    let paypal = `
+        <div class="pagoPaypal form-group" style="margin-top: 10px;">
+        <label for="Email" class="col-form-label">Email: </label> <br>
+        <input type="email" class="form-control mr-2 " id="email_PayPal" placeholder="Email" required>
+        </div>
+    `;
+    let mastercard = `  <div class="pagoMasterCard form-group">
+    <label for="card-number" class="col-form-label">Card number: </label> <br>
+    <input type="text" class="form-control" id="card-number" required maxlength="16"  onkeypress="onlyNumber(event, 'modal-payment', 'ErrorPayment','480px','400px');">
+
+    <label for="expirationdate" class="col-form-label">Expiration date: </label> <br>
+    <input type="text" class="form-control mr-2 " style="display: inline-block;width:85px;" id="experiationMonth"
+    placeholder="MM" required maxlength="2" onkeypress="onlyNumber(event, 'modal-payment', 'ErrorPayment','480px','400px')">
+    <input type="text" class="form-control mr-2 " style="display: inline-block;width:85px;" id="experiationYear"
+    placeholder="YY" required maxlength="4" onkeypress="onlyNumber(event, 'modal-payment', 'ErrorPayment','480px','400px')"><br>
+    <label for="CVV" class="col-form-label">CVV2/CVC2</label> <br>
+    <input type="text" class="form-control mr-2 " style="display: inline-block;width:85px;" id="CVV" placeholder="CVV"
+    required maxlength="3" onkeypress="onlyNumber(event, 'modal-payment', 'ErrorPayment','480px','400px')">
+    </div>
+`;
+
+    let wiretransfer = `
+    <div class="wiretransfer form-group">
+        <label for="nroCuenta" class="col-form-label">Account number: </label> <br>
+        <input type="text" class="form-control mr-2 " id="accNumber" placeholder="Enter account number" required onkeypress="onlyNumber(event,'modal-payment','ErrorPayment','450px', '360px');" maxlength="20"><br>
+
+        <label for="cedula" class="col-form-label">Identification card: </label> <br>
+        <input type="text" class="form-control mr-2 " id="ID" placeholder="Enter ID number" required onkeypress="onlyNumber(event,'modal-payment','ErrorPayment','450px', '360px');" maxlength="20"><br>
+    </div>
+    `;
+let divPay = document.getElementById("payment"); 
+    let payment = document.getElementsByName("payment");
+    for (var i = 0; i < payment.length;i++){
+      if(payment[i].checked){
+          var pay = parseInt(payment[i].value);
+          if (pay == 0) {
+              divPay.innerHTML = mastercard;
+              $("#modal-payment").css("height","400px");                    
+          } else if (pay == 1){
+            divPay.innerHTML = paypal;
+            $("#modal-payment").css("height","300px");
+            
+          } else{
+            divPay.innerHTML = wiretransfer;
+            $("#modal-payment").css("height","360px");
+          }
+          break;
+      }
+    }  
+
+    
+}
+
+
+
+
+  
 
 
 

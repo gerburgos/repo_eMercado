@@ -535,6 +535,18 @@
             background: #7fad39;
             letter-spacing: 2px;
         }
+        input:invalid {
+            border: 1px solid #ff0808;
+          }
+          input:valid {
+              border: 1px solid #0fbd83;
+          }
+          :invalid {
+            box-shadow: none;
+          }
+          input:required:invalid {
+            border-color: #C00000;
+          }
         
      
         

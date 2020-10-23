@@ -8,8 +8,8 @@ const CART_INFO_URL = "https://japdevdep.github.io/ecommerce-api/cart/654.json";
 const CART_BUY_URL = "https://japdevdep.github.io/ecommerce-api/cart/buy.json";
 const LIST_URL = "https://api.npoint.io/d320ff9b8570a1f1c8fe";
 
-
-
+var alertError = document.getElementById("Error");
+var alertErrorPayment = document.getElementById("ErrorPayment");
 function setUser() {
 
     var user = localStorage.getItem("user");
@@ -23,7 +23,7 @@ function setUser() {
 }
 
 
-var getJSONData = function(url) {
+var getJSONData = function (url) {
     var result = {};
     //Cambiamos el fetchh por fetch, además de agregar url 
     return fetch(url)
@@ -35,18 +35,18 @@ var getJSONData = function(url) {
                 throw error(response.statusText);
             }
         })
-        .then(function(response) {
+        .then(function (response) {
             result.status = 'ok';
             result.data = response;
             return result;
         })
-        .catch(function(error) {
+        .catch(function (error) {
             result.status = 'error';
             result.data = error;
             return result;
         });
 }
-document.addEventListener("DOMContentLoaded", function(e) {
+document.addEventListener("DOMContentLoaded", function (e) {
     setUser();
     onLoad();
 });
@@ -74,3 +74,168 @@ function googleTranslateElementInit() {
     $("#google_translate_element div").css('padding', '3px');
 
 }
+
+function onlyNumber(e, modal, error, sizeE, sizeC) {
+    let msgError = `<strong>Warning!</strong>&nbsp;You must write only numbers.`
+    var key = window.event ? e.which : e.keyCode;
+    if (key < 48 || key > 57) {
+        e.preventDefault();
+        alertError.innerHTML = msgError;
+        alertErrorPayment.innerHTML = msgError;
+        $("#" + modal).css("height", sizeE); /* 300 modal-checkout */
+        $("#" + error).removeClass("d-none");
+    } else {
+        $("#" + modal).css("height", sizeC); /* 270 modal-checkout */
+        $("#" + error).addClass("d-none");
+    }
+}
+
+$(document).ready(function () {
+    $('#clearbutton').click(function () {
+        $('input[type="text"]').val('');
+        $("#Error").addClass("d-none");
+    });
+});
+
+function onlyLetter(e) {
+    let msgError = `<strong>Warning!</strong>&nbsp;You must write only letters.`
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toLowerCase();
+    letters = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+    chrSpecial = "8-37-39-46";
+
+    special_key = false
+    for (var i in chrSpecial) {
+        if (key == chrSpecial[i]) {
+            special_key = true;
+            break;
+        }
+    }
+
+    if (letters.indexOf(tecla) == -1 && !special_key) {
+        alertError.innerHTML = msgError;
+        $("#modal-checkout").css("height", "300px");
+        $("#Error").removeClass("d-none");
+        return false;
+    } else {
+        $("#Error").addClass("d-none");
+        $("#modal-checkout").css("height", "270px");
+    }
+}
+function validationInput(e) {
+    let msgError = `<strong>Warning!</strong>&nbsp;Incorrect data`
+    var cty = document.getElementById("country").value;
+    var srt = document.getElementById("street").value;
+    var number = document.getElementById("nmb").value;
+    var cnr = document.getElementById("corner").value;
+
+    if (cty.trim() === "" || srt.trim() === "" || number.trim() === "" || cnr.trim() === "") {
+        e.preventDefault();
+        e.stopPropagation();
+        alertError.innerHTML = msgError;
+        $("#modal-checkout").css("height", "300px")
+        $("#Error").removeClass("d-none");
+    } else {
+        $('#form').modal('hide');
+        $("#modal-checkout").css("height", "270px");
+    }
+}
+
+function validationChecked() {
+    let msgError = `<strong>Warning!</strong>&nbsp;Select a payment method`;
+    if (!document.querySelector('input[name="payment"]:checked')) {
+        alertErrorPayment.innerHTML = msgError;
+        $("#ErrorPayment").removeClass("d-none");
+        setTimeout(function () { $("#ErrorPayment").addClass("d-none"); }, 3000)
+    }
+}
+
+
+
+function validationMasterCard() {
+    let msgSuccess = `<strong>Congratulations!</strong>&nbsp;Purchase made`
+    let msgError = "";
+    let card = document.getElementById("card-number").value;
+    let expDateM = document.getElementById("experiationMonth").value;
+    let expDateY = document.getElementById("experiationYear").value;
+    let anio = (new Date).getFullYear();
+    if (card.length < 16) {
+        msgError = `<strong>Warning!</strong>&nbsp;You must enter a valid card`
+        alertErrorPayment.innerHTML = msgError;
+        $("#modal-payment").css("height", "470px");
+        $("#ErrorPayment").removeClass("d-none");
+    } else if (expDateM > 12 || expDateM < 1) {
+        msgError = `<strong>Warning!</strong>&nbsp;You must enter a valid month`
+        alertErrorPayment.innerHTML = msgError;
+        $("#modal-payment").css("height", "470px");
+        $("#ErrorPayment").removeClass("d-none");
+    } else if (expDateY < anio) {
+        msgError = `<strong>Warning!</strong>&nbsp;You must enter a valid year`
+        alertErrorPayment.innerHTML = msgError;
+        $("#modal-payment").css("height", "470px");
+        $("#ErrorPayment").removeClass("d-none");
+    } else {
+        document.getElementById("SuccessPayment").innerHTML = msgSuccess;
+        $("#modal-payment").css("height", "470px");
+        $("#SuccessPayment").removeClass("d-none");
+    }
+    setTimeout(function () { $("#ErrorPayment").addClass("d-none"); $("#modal-payment").css("height", "400px"); }, 3000);
+}
+function validationInputPay() {
+
+    let msgErrorPaypal = `<strong>Warning!</strong>&nbsp;You have to put an email`;
+    let msgErrorMasterCard = `<strong>Warning!</strong>&nbsp;Incorrect information or invalid fields`;
+    let msgErrorWireTransfer = `<strong>Warning!</strong>&nbsp; ID or Account Number is invalid or empty`;
+    let payment = document.getElementsByName("payment");
+    for (var i = 0; i < payment.length; i++) {
+        if (payment[i].checked) {
+            var pay = parseInt(payment[i].value);
+            if (pay == 0) {
+                let card = document.getElementById("card-number").value;
+                let expDateM = document.getElementById("experiationMonth").value;
+                let expDateY = document.getElementById("experiationYear").value;
+                let cvv = document.getElementById("CVV").value;
+                if (card.trim() === "" || expDateM.trim() === "" || expDateY.trim() === "" || cvv.trim() === "") {
+                    alertErrorPayment.innerHTML = msgErrorMasterCard;
+                    $("#ErrorPayment").removeClass("d-none");
+                    $("#modal-payment").css("height", "480px");
+                    setTimeout(function () { $("#ErrorPayment").addClass("d-none"); $("#modal-payment").css("height", "400px"); }, 3000);
+                }
+                validationMasterCard();
+
+            } else if (pay == 1) {
+                let email = document.getElementById("email_PayPal").value;
+                if (email.trim() === "") {
+                    alertErrorPayment.innerHTML = msgErrorPaypal;
+                    $("#ErrorPayment").removeClass("d-none");
+                    $("#modal-payment").css("height", "340px");
+                    setTimeout(function () { $("#ErrorPayment").addClass("d-none"); $("#modal-payment").css("height", "300px"); }, 3000);
+
+                }
+            } else {
+                let ID = document.getElementById("ID").value;
+                let accNumber = document.getElementById("accNumber").value;
+
+                if (ID.trim() === "" || accNumber.trim() === "") {
+                    alertErrorPayment.innerHTML = msgErrorWireTransfer;
+                    $("#ErrorPayment").removeClass("d-none");
+                    $("#modal-payment").css("height", "450px");
+                    setTimeout(function () { $("#ErrorPayment").addClass("d-none"); $("#modal-payment").css("height", "360px"); }, 3000);
+
+                } else {
+                    if (accNumber.length < 14 || accNumber.length > 20) {
+                    alertErrorPayment.innerHTML = `<strong>Warning!</strong>&nbsp; Account Number is invalid (Minimum 14 digits)`;
+                    $("#ErrorPayment").removeClass("d-none");
+                    $("#modal-payment").css("height", "450px");
+                    setTimeout(function () { $("#ErrorPayment").addClass("d-none"); $("#modal-payment").css("height", "360px"); }, 3000);
+                    }
+                }
+            }
+            break;
+        }
+    }
+}
+
+
+
+
