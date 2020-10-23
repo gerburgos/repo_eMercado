@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
+<html lang="en">
+
+<head>
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="680344540172-6ior7kepo4uub9ka1eh2r2jb656lgr60.apps.googleusercontent.com">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <title>eMercado - Todo lo que busques está aquí</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/contactstyles.css">
+</head>
+
+<body>
+    <!-- Navegation -->
+    <nav class="site-header sticky-top py-1" style="background: #333333;
+     background: -webkit-linear-gradient(to left, #dd1818, #333333);
+     background: linear-gradient(to left, #dd1818, #333333);">
+        <div class="container d-flex flex-column flex-md-row justify-content-between">
+            <img src="img/nyancat.gif" width="45" style="border-radius: 50px; align-items: center;" height="45" class="d-inline-block align-top" alt="">
+            <a class="py-2 d-none d-md-inline-block borderZoom" href="cover.html" style="text-decoration: none;">Inicio</a>
+            <a class="py-2 d-none d-md-inline-block borderZoom" href="categories.html" style="text-decoration: none;">Categorías</a>
+            <a class="py-2 d-none d-md-inline-block borderZoom" href="products.html" style="text-decoration: none;">Productos</a>
+            <a class="py-2 d-none d-md-inline-block borderZoom" href="sell.html" style="text-decoration: none;">Vender</a>
+            <a class="py-2 d-none d-md-inline-block borderZoom" href="#" style="text-decoration: none;" data-toggle="modal" data-target="#exampleModal"><i class="far fa-envelope"></i></a>
+            <div class="py-2 d-none d-md-inline-block borderZoom" id="google_translate_element"></div>
+            <div class="dropdown show">
+                <button class="btn dropdown-toggle" type="button" id="menu1" data-toggle="dropdown" style="background-color: coral; border-radius: 10px;height: 50px;">
+                     <img id="profilePic" style="border-radius: 50px;width: 35px; height: 35px; border: solid 1px;" src="" alt="" class="d-inline-block align-top">
+                     <a class="py-2 d-none d-md-inline-block" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 4px;"></a>
+                 </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" style="border-radius: 10px;background-color: coral;">
+                    <a class="dropdown-item" href="my-profile.html" id="profile"><i class="far fa-id-card"></i> My profile</a>
+                    <a class="dropdown-item" href="cart.html" id="cart"><i class="far fa-shopping-cart"></i> Shopping Cart</a>
+                    <a class="dropdown-item" onclick="signOut();" id="LogOut"><i class="far fa-sign-out-alt"></i> Log Out</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Contact Us</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-all">
+                        <div class="sub-container">
+                            <div class="contact100-pic js-tilt" data-tilt>
+                                <img src="img/img-01.png" alt="IMG">
+                            </div>
+                            <div class="wrap-input validate-input" data-validate="Name is required">
+                                <input class="input" type="text" name="name" placeholder="Name" id="subject">
+                                <span class="focus-input"></span>
+                                <span class="symbol-input">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </span>
+                            </div>
+                            <div class="wrap-input validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                                <input class="input" type="text" name="email" placeholder="Email" id="email">
+                                <span class="focus-input"></span>
+                                <span class="symbol-input">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </span>
+                            </div>
+
+                            <div class="wrap-input validate-input" data-validate="Message is required">
+                                <textarea class="input" name="message" placeholder="Message" id="msg"></textarea>
+                                <span class="focus-input"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer" style="justify-content: center;">
+                    <button type="button" class="btn btn-primary" style="text-align: center;" onclick="sendEmail();">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <main role="main" class="pb-5">
+        <div class="bg-7 p-4 text-center">
+            <h1 class="t-stroke" style="font-family: Raleway;" data-foo="Productos"></h1>
+            <div class="input-group md-form form-sm form-1 pl-0 container mb-5">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-danger lens" id="btn"><i class="fas fa-search text-white" aria-hidden="true"></i></button>
+                </div>
+                <input class="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search" id="search">
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="col text-right">
+                <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
+                    <label class="btn btn-light active" id="sortAsc">
+                        <input type="radio" name="options" autocomplete="off" checked><i class="fal fa-sort-amount-down-alt"></i>Asc.
+                    </label>
+                    <label class="btn btn-light" id="sortDesc">
+                        <input type="radio" name="options" autocomplete="off"><i class="fal fa-sort-amount-up"></i>Desc.
+                    </label>
+                    <label class="btn btn-light" id="sortByCount">
+                        <input type="radio" name="options" autocomplete="off"><i class="fal fa-search-dollar"></i>Rel.
+                    </label>
+                </div>
+            </div>
+            <div class="row justify-content-end">
+                <div class="col-md-6"></div>
+                <div class="col-md-6 col-sm-12 mb-1 container">
+                    <div class="row container p-0 m-0">
+                        <div class="col">
+                            <p class="font-weight-normal text-right my-2">Cant.</p>
+                        </div>
+                        <div class="col">
+                            <input class="form-control" type="number" placeholder="min." id="rangeFilterCountMin">
+                        </div>
+                        <div class="col">
+                            <input class="form-control" type="number" placeholder="máx." id="rangeFilterCountMax">
+                        </div>
+                        <div class="col-3 p-0">
+                            <div class="btn-group" role="group">
+                                <button class="btn btn-light btn-block" id="rangeFilterCount">Filtrar</button>
+                                <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3 class="list-group-item p-1 disable">Autos</h3>
+
+            <div class="row">
+
+                <div class="row align-items-center" id="cat-list-container">
+
+                </div>
+
+            </div>
+        </div>
+    </main>
+    <footer class="text-muted bg-light">
+        <div class="container">
+            <p class="float-right">
+                <a href="#">Volver arriba</a>
+            </p>
+            <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
+            <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+        </div>
+    </footer>
+
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/sweetAlert.js"></script>
+    <script src="js/logOut.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+</body>
+
+</html>
