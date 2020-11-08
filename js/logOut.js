@@ -14,4 +14,5 @@ function onLoad() {
 function deleteUser() {
     localStorage.removeItem('user');
     localStorage.removeItem('img');
+    localStorage.removeItem('Usuario');
 }
